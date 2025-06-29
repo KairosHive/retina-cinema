@@ -1,0 +1,11 @@
+# openAI API key
+openai.key
+
+# TouchDesigner backup files
+*.*.toe
+Backup/
+
+# Recorded movies
+*.mov
+*.mp4
+*.png

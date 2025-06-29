@@ -1,0 +1,602 @@
+links:
+- node_in: lempelziv0
+  node_out: buffer0
+  slot_in: data
+  slot_out: out
+- node_in: join0
+  node_out: buffer0
+  slot_in: a
+  slot_out: out
+- node_in: lempelziv1
+  node_out: buffer1
+  slot_in: data
+  slot_out: out
+- node_in: join0
+  node_out: buffer1
+  slot_in: b
+  slot_out: out
+- node_in: reduce2
+  node_out: connectivity0
+  slot_in: array
+  slot_out: matrix
+- node_in: oscout0
+  node_out: extendedtable0
+  slot_in: data
+  slot_out: table
+- node_in: buffer0
+  node_out: filter0
+  slot_in: val
+  slot_out: filtered_data
+- node_in: buffer1
+  node_out: filter1
+  slot_in: val
+  slot_out: filtered_data
+- node_in: connectivity0
+  node_out: join0
+  slot_in: data
+  slot_out: out
+- node_in: normalization0
+  node_out: lempelziv0
+  slot_in: data
+  slot_out: lzc
+- node_in: normalization1
+  node_out: lempelziv1
+  slot_in: data
+  slot_out: lzc
+- node_in: reduce0
+  node_out: lslclient0
+  slot_in: array
+  slot_out: out
+- node_in: reduce1
+  node_out: lslclient1
+  slot_in: array
+  slot_out: out
+- node_in: filter0
+  node_out: reduce0
+  slot_in: data
+  slot_out: out
+- node_in: filter1
+  node_out: reduce1
+  slot_in: data
+  slot_out: out
+- node_in: reduce3
+  node_out: reduce2
+  slot_in: array
+  slot_out: out
+- node_in: welfordsztransform2
+  node_out: reduce3
+  slot_in: data
+  slot_out: out
+- node_in: extendedtable0
+  node_out: welfordsztransform2
+  slot_in: array_input3
+  slot_out: normalized
+- node_in: extendedtable0
+  node_out: normalization0
+  slot_in: array_input1
+  slot_out: normalized
+- node_in: extendedtable0
+  node_out: normalization1
+  slot_in: array_input2
+  slot_out: normalized
+nodes:
+  buffer0:
+    _type: Buffer
+    category: signal
+    gui_kwargs:
+      pos:
+      - 711
+      - 402
+      viewers:
+        out:
+          collapsed: false
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
+    params:
+      buffer:
+        axis: -1
+        reset: false
+        size: 500.0
+        unit: samples
+      common:
+        autotrigger: false
+        max_frequency: 30.0
+  buffer1:
+    _type: Buffer
+    category: signal
+    gui_kwargs:
+      pos:
+      - 714
+      - 606
+      viewers:
+        out:
+          collapsed: false
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
+    params:
+      buffer:
+        axis: -1
+        reset: false
+        size: 500.0
+        unit: samples
+      common:
+        autotrigger: false
+        max_frequency: 30.0
+  connectivity0:
+    _type: Connectivity
+    category: analysis
+    gui_kwargs:
+      pos:
+      - 1168
+      - 191
+      viewers:
+        matrix:
+          collapsed: false
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 1
+          width: 175
+    params:
+      Adjacency:
+        Binarize: false
+        threshold: 0.5
+      biotuner:
+        f_max: 30.0
+        f_min: 2.0
+        method: None
+        n_peaks: 5
+        peaks_function: EMD
+        precision: 0.1
+      classical:
+        method: mutual_info
+      common:
+        autotrigger: false
+        max_frequency: 30.0
+  eegrecording0:
+    _type: EEGRecording
+    category: inputs
+    gui_kwargs:
+      pos:
+      - 143
+      - 333
+      viewers: {}
+    params:
+      common:
+        autotrigger: false
+        max_frequency: 30.0
+      recording:
+        file_path: ''
+        file_sfreq: 256.0
+        source_name: goofi
+        stream_name: recording
+        use_example_data: true
+  extendedtable0:
+    _type: ExtendedTable
+    category: inputs
+    gui_kwargs:
+      pos:
+      - 2034
+      - 333
+      viewers:
+        table:
+          collapsed: false
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
+    params:
+      common:
+        autotrigger: false
+        max_frequency: 30.0
+      table:
+        param1: feat1
+        param10: value10
+        param2: feat2
+        param3: blend
+        param4: value4
+        param5: value5
+        param6: value6
+        param7: value7
+        param8: value8
+        param9: value9
+  filter0:
+    _type: Filter
+    category: signal
+    gui_kwargs:
+      pos:
+      - 507
+      - 402
+      viewers:
+        filtered_data:
+          collapsed: false
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
+    params:
+      bandpass:
+        apply: true
+        f_high: 50.0
+        f_low: 1.0
+        method: Causal
+        order: 3
+        padding: 0.1
+        ripple: 1.0
+        type: butterworth
+      common:
+        autotrigger: false
+        max_frequency: 30.0
+      notch:
+        Q: 10.0
+        apply: true
+        f_center: 60.0
+        method: Causal
+        order: 1
+        padding: 0.1
+        ripple: 1.0
+        type: butterworth
+      signal:
+        buffer_size: 512
+        demean: false
+        detrend: false
+        internal_buffer: false
+  filter1:
+    _type: Filter
+    category: signal
+    gui_kwargs:
+      pos:
+      - 507
+      - 605
+      viewers:
+        filtered_data:
+          collapsed: false
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
+    params:
+      bandpass:
+        apply: true
+        f_high: 50.0
+        f_low: 1.0
+        method: Causal
+        order: 3
+        padding: 0.1
+        ripple: 1.0
+        type: butterworth
+      common:
+        autotrigger: false
+        max_frequency: 30.0
+      notch:
+        Q: 10.0
+        apply: true
+        f_center: 60.0
+        method: Causal
+        order: 1
+        padding: 0.1
+        ripple: 1.0
+        type: butterworth
+      signal:
+        buffer_size: 512
+        demean: false
+        detrend: false
+        internal_buffer: false
+  join0:
+    _type: Join
+    category: array
+    gui_kwargs:
+      pos:
+      - 954
+      - 189
+      viewers:
+        out:
+          collapsed: false
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
+    params:
+      common:
+        autotrigger: false
+        max_frequency: 30.0
+      join:
+        axis: 0
+        method: stack
+  lempelziv0:
+    _type: LempelZiv
+    category: analysis
+    gui_kwargs:
+      pos:
+      - 955
+      - 403
+      viewers:
+        lzc:
+          collapsed: false
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
+    params:
+      common:
+        autotrigger: false
+        max_frequency: 30.0
+      lempel_ziv:
+        axis: -1
+        binarization: mean
+  lempelziv1:
+    _type: LempelZiv
+    category: analysis
+    gui_kwargs:
+      pos:
+      - 955
+      - 606
+      viewers:
+        lzc:
+          collapsed: false
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
+    params:
+      common:
+        autotrigger: false
+        max_frequency: 30.0
+      lempel_ziv:
+        axis: -1
+        binarization: mean
+  lslclient0:
+    _type: LSLClient
+    category: inputs
+    gui_kwargs:
+      pos:
+      - 92
+      - 399
+      viewers:
+        out:
+          collapsed: false
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
+    params:
+      common:
+        autotrigger: true
+        max_frequency: 30.0
+      lsl_stream:
+        refresh: true
+        source_name: goofi
+        stream_name: ''
+  lslclient1:
+    _type: LSLClient
+    category: inputs
+    gui_kwargs:
+      pos:
+      - 95
+      - 603
+      viewers:
+        out:
+          collapsed: false
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
+    params:
+      common:
+        autotrigger: true
+        max_frequency: 30.0
+      lsl_stream:
+        refresh: false
+        source_name: goofi
+        stream_name: ''
+  normalization0:
+    _type: Normalization
+    category: signal
+    gui_kwargs:
+      pos:
+      - 1166
+      - 404
+      viewers:
+        normalized:
+          collapsed: false
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
+    params:
+      common:
+        autotrigger: false
+        max_frequency: 30.0
+      minmax:
+        feature_max: 1.0
+        feature_min: 0.0
+      normalization:
+        axis: -1
+        buffer_size: 1024
+        method: z-score
+        reset: false
+      quantile:
+        n_quantiles: 1000
+        output_distribution: uniform
+      robust:
+        quantile_max: 75
+        quantile_min: 25
+        unit_variance: false
+  normalization1:
+    _type: Normalization
+    category: signal
+    gui_kwargs:
+      pos:
+      - 1167
+      - 606
+      viewers:
+        normalized:
+          collapsed: false
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
+    params:
+      common:
+        autotrigger: false
+        max_frequency: 30.0
+      minmax:
+        feature_max: 1.0
+        feature_min: 0.0
+      normalization:
+        axis: -1
+        buffer_size: 1024
+        method: z-score
+        reset: false
+      quantile:
+        n_quantiles: 1000
+        output_distribution: uniform
+      robust:
+        quantile_max: 75
+        quantile_min: 25
+        unit_variance: false
+  oscout0:
+    _type: OSCOut
+    category: outputs
+    gui_kwargs:
+      pos:
+      - 2244
+      - 595
+      viewers: {}
+    params:
+      common:
+        autotrigger: false
+        max_frequency: 30.0
+      osc:
+        address: localhost
+        broadcast: false
+        bundle: false
+        port: 8000
+        prefix: /goofi
+  reduce0:
+    _type: Reduce
+    category: array
+    gui_kwargs:
+      pos:
+      - 298
+      - 400
+      viewers:
+        out:
+          collapsed: false
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
+    params:
+      common:
+        autotrigger: false
+        max_frequency: 30.0
+      reduce:
+        axis: 0
+        method: mean
+  reduce1:
+    _type: Reduce
+    category: array
+    gui_kwargs:
+      pos:
+      - 300
+      - 604
+      viewers:
+        out:
+          collapsed: false
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
+    params:
+      common:
+        autotrigger: false
+        max_frequency: 30.0
+      reduce:
+        axis: 0
+        method: mean
+  reduce2:
+    _type: Reduce
+    category: array
+    gui_kwargs:
+      pos:
+      - 1380
+      - 192
+      viewers:
+        out:
+          collapsed: false
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
+    params:
+      common:
+        autotrigger: false
+        max_frequency: 30.0
+      reduce:
+        axis: 0
+        method: mean
+  reduce3:
+    _type: Reduce
+    category: array
+    gui_kwargs:
+      pos:
+      - 1584
+      - 191
+      viewers:
+        out:
+          collapsed: false
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
+    params:
+      common:
+        autotrigger: false
+        max_frequency: 30.0
+      reduce:
+        axis: 0
+        method: mean
+  welfordsztransform2:
+    _type: WelfordsZTransform
+    category: signal
+    gui_kwargs:
+      pos:
+      - 1786
+      - 191
+      viewers:
+        normalized:
+          collapsed: false
+          height: 100
+          log_scale_x: false
+          log_scale_y: false
+          viewer_idx: 0
+          width: 175
+    params:
+      common:
+        autotrigger: false
+        max_frequency: 30.0
+      welford:
+        biased_std: false
+        outlier_stds: 4.0
+        reset: true
