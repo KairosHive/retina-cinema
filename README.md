@@ -21,12 +21,12 @@ This repository contains the **TouchDesigner project** and **configuration files
 4. Open the `retina-cinema.toe` file in TouchDesigner and drag the StreamDiffusion Node into the project.
 5. Connect the StreamDiffusion node's first input to the MoviePlayer's TOP output, and the StramDiffusion output to the input of the SDOutput node as shown in the screenshot:
 <p align="center">
-    <img src=https://github.com/user-attachments/assets/5f8b64da-b406-45f2-bb2e-4b6a4fe4c89b width="900">
+    <img src=https://github.com/user-attachments/assets/781d77a0-fd64-4de7-aca9-9e0bbdbfbeea width="900">
 </p>
 
 6. Configure the parameters of the StreamDiffusion node as shown in the following screenshot:
 <p align="center">
-    <img src=https://github.com/user-attachments/assets/63fafb7b-4d74-4fc1-b64d-2c4465826b46 width="500">
+    <img src=https://github.com/user-attachments/assets/c40a39b0-c33a-42da-941e-876d8a13c90c width="500">
 </p>
 
 7. Start goofi-pipe and load the desired patch:
