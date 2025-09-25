@@ -29,12 +29,16 @@ This repository contains the **TouchDesigner project** and **configuration files
     <img src=https://github.com/user-attachments/assets/c40a39b0-c33a-42da-941e-876d8a13c90c width="500">
 </p>
 
+> [!NOTE]
+> If you want to use your own custom prompts instead of context-aware and dynamically generated ones, enter your custom prompts in the four respective `Prompt` fields.
+
 7. Start goofi-pipe and load the desired patch:
     - `goofi-pipe single-user.gfi` for modulation with a single EEG stream
     - `goofi-pipe multi-user.gfi` for modulation with two simulatenous EEG streams (hyperscanning)
-8. Start streaming your EEG via LSL and select the correct LSL source and stream names in the LSLCLient node(s) inside the goofi-pipe interface.
-9. Start the StreamDiffusion model (in TouchDesigner).
-10. Enjoy ReTiNA-Cinema!
+8. To enable dynamic prompt generation, either configure the `Img2Txt` node to use a local vision LLM (e.g. `ollama:gemma3`), or enter your OpenAI API key into a file called `openai.key`.
+9. Start streaming your EEG via LSL and select the correct LSL source and stream names in the LSLCLient node(s) inside the goofi-pipe interface.
+10. Start the StreamDiffusion model (in TouchDesigner).
+11. Enjoy ReTiNA-Cinema!
 
 ---
 
