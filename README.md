@@ -32,6 +32,11 @@ This repository contains the **TouchDesigner project** and **configuration files
 > [!NOTE]
 > If you want to use your own custom prompts instead of context-aware and dynamically generated ones, enter your custom prompts in the four respective `Prompt` fields.
 
+For improved temporal consistency of the generated video, also enable the V2V mode and set the Feature Injection Strength to 1.9.
+<p align="center">
+    <img src=https://github.com/user-attachments/assets/308f1e22-108c-48ad-b833-501df9269dfa width="500">
+</p>
+
 7. Start goofi-pipe and load the desired patch:
     - `goofi-pipe single-user.gfi` for modulation with a single EEG stream
     - `goofi-pipe multi-user.gfi` for modulation with two simulatenous EEG streams (hyperscanning)
