@@ -90,6 +90,7 @@ nodes:
     params:
       recording:
         use_example_data: true
+        example_data_subject: 1
         file_path: ''
         file_sfreq: 256.0
         source_name: goofi
@@ -561,8 +562,8 @@ nodes:
         process_group: ''
     gui_kwargs:
       pos:
-      - 719
-      - 831
+      - 717
+      - 829
       viewers:
         data_output:
           viewer_idx: 1
@@ -586,19 +587,7 @@ nodes:
         model: gpt-4o-mini
         max_new_tokens: 200
         temperature: 1.0
-        prompt: 'You are given a single still frame from a film or video.  Your task
-          is to analyze this frame and generate **four distinct and complementary
-          artistic visual style descriptions**.  Requirements:  - Each style must
-          be described in **rich cinematic and artistic language**.  - Each description
-          must be **maximum 15 words**.  - The four styles must be **orthogonal/complementary**:
-          they must differ in appearance, mood, emotion, and character.  - Avoid redundancy;
-          emphasize unique artistic perspectives (e.g., lighting, lens, palette, texture,
-          atmosphere, framing).  - Your output must be **only JSON** in the following
-          structure (no extra text, no explanations):  {  "style1": "description of
-          first style (max 15 words)",  "style2": "description of second style (max
-          15 words)",  "style3": "description of third style (max 15 words)",  "style4":
-          "description of fourth style (max 15 words)"}Always respond strictly in
-          JSON format. Do not include any text outside the JSON object.'
+        prompt: ''
         openai_key: openai.key
       common:
         autotrigger: false
@@ -607,8 +596,8 @@ nodes:
         process_group: ''
     gui_kwargs:
       pos:
-      - 956
-      - 833
+      - 1172
+      - 831
       viewers:
         generated_text:
           viewer_idx: 0
@@ -631,8 +620,8 @@ nodes:
         process_group: ''
     gui_kwargs:
       pos:
-      - 1167
-      - 831
+      - 1387
+      - 829
       viewers:
         table:
           viewer_idx: 0
@@ -647,6 +636,7 @@ nodes:
     params:
       recording:
         use_example_data: true
+        example_data_subject: 2
         file_path: ''
         file_sfreq: 256.0
         source_name: goofi2
@@ -693,6 +683,149 @@ nodes:
       - 192
       viewers:
         normalized:
+          viewer_idx: 0
+          width: 175
+          height: 100
+          collapsed: false
+          log_scale_x: false
+          log_scale_y: false
+  oscin0:
+    _type: OSCIn
+    category: inputs
+    params:
+      osc:
+        backend: oscpy
+        address: 0.0.0.0
+        port: 8001
+        find_usable_port_tries: 0
+        keep_messages: true
+        clear: false
+      common:
+        autotrigger: true
+        max_frequency: 1.0
+        frequency_mode: updates-per-second
+        process_group: ''
+    gui_kwargs:
+      pos:
+      - 84
+      - 1001
+      viewers:
+        message:
+          viewer_idx: 0
+          width: 175
+          height: 100
+          collapsed: false
+          log_scale_x: false
+          log_scale_y: false
+  tableselectstring0:
+    _type: TableSelectString
+    category: misc
+    params:
+      selection:
+        key: /prompt_cue
+      common:
+        autotrigger: false
+        max_frequency: 30.0
+        frequency_mode: updates-per-second
+        process_group: ''
+    gui_kwargs:
+      pos:
+      - 298
+      - 999
+      viewers:
+        output_string:
+          viewer_idx: 0
+          width: 175
+          height: 100
+          collapsed: false
+          log_scale_x: false
+          log_scale_y: false
+  constantstring0:
+    _type: ConstantString
+    category: inputs
+    params:
+      constant:
+        value: 'You are given a single still frame from a film or video.  Your task
+          is to analyze this frame and generate **four distinct and complementary
+          artistic visual style descriptions**.  Requirements:  - Each style must
+          be described in **rich cinematic and artistic language**.  - Each description
+          must be **maximum 25 words**.  - The four styles must be **orthogonal/complementary**:
+          they must differ in appearance, mood, emotion, and character.  - Avoid redundancy;
+          emphasize unique artistic perspectives (e.g., lighting, lens, palette, texture,
+          atmosphere, framing).  - **Style 1 must always be constructive** (adding
+          styles, details, complexity).  - **Style 4 must always be deconstructive**
+          (reducing complexity, minimalism).  - **Styles 2 and 3 are unconstrained**.  Your
+          output must be **only JSON** in the following structure (no extra text,
+          no explanations):  {  "style1": "description of first style (max 25 words,
+          constructive)",    "style2": "description of second style (max 25 words,
+          unconstrained)",    "style3": "description of third style (max 25 words,
+          unconstrained)",    "style4": "description of fourth style (max 25 words,
+          deconstructive)"  }Always respond strictly in JSON format. Do not include
+          any text outside the JSON object.  When generating the four style descriptions,
+          incorporate the following styles: '
+        overwrite_timeout: 5.0
+      common:
+        autotrigger: true
+        max_frequency: 1.0
+        frequency_mode: updates-per-second
+        process_group: ''
+    gui_kwargs:
+      pos:
+      - 301
+      - 811
+      viewers:
+        out:
+          viewer_idx: 0
+          width: 175
+          height: 100
+          collapsed: false
+          log_scale_x: false
+          log_scale_y: false
+  joinstring0:
+    _type: JoinString
+    category: misc
+    params:
+      join:
+        separator: ' '
+        string1: true
+        string2: true
+        string3: true
+        string4: true
+        string5: true
+      common:
+        autotrigger: false
+        max_frequency: 30.0
+        frequency_mode: updates-per-second
+        process_group: ''
+    gui_kwargs:
+      pos:
+      - 514
+      - 828
+      viewers:
+        output:
+          viewer_idx: 0
+          width: 175
+          height: 100
+          collapsed: false
+          log_scale_x: false
+          log_scale_y: false
+  stringawait0:
+    _type: StringAwait
+    category: misc
+    params:
+      string_await:
+        require_change: false
+      common:
+        autotrigger: false
+        max_frequency: 30.0
+        frequency_mode: updates-per-second
+        process_group: ''
+    gui_kwargs:
+      pos:
+      - 949
+      - 828
+      viewers:
+        out:
           viewer_idx: 0
           width: 175
           height: 100
@@ -780,6 +913,10 @@ links:
   node_in: img2txt0
   slot_out: data_output
   slot_in: image
+- node_out: loadfile0
+  node_in: stringawait0
+  slot_out: data_output
+  slot_in: trigger
 - node_out: img2txt0
   node_in: stringtotable0
   slot_out: generated_text
@@ -792,3 +929,23 @@ links:
   node_in: extendedtable0
   slot_out: normalized
   slot_in: array_input3
+- node_out: oscin0
+  node_in: tableselectstring0
+  slot_out: message
+  slot_in: input_table
+- node_out: tableselectstring0
+  node_in: joinstring0
+  slot_out: output_string
+  slot_in: string2
+- node_out: constantstring0
+  node_in: joinstring0
+  slot_out: out
+  slot_in: string1
+- node_out: joinstring0
+  node_in: stringawait0
+  slot_out: output
+  slot_in: message
+- node_out: stringawait0
+  node_in: img2txt0
+  slot_out: out
+  slot_in: prompt
